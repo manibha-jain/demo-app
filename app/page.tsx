@@ -17,15 +17,17 @@ export default async function HomePage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Discover Hotels</h1>
-        <p className="text-gray-500 mt-2">Read honest reviews from real travellers</p>
+      <div className="mb-10">
+        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+          Discover <span className="text-blue-600">Hotels</span>
+        </h1>
+        <p className="text-gray-500 mt-2 text-base">Read honest reviews from real travellers around the world</p>
       </div>
       {!hotels || hotels.length === 0 ? (
         <p className="text-gray-400 text-center py-20">No hotels found. Check back soon!</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {hotels.map((hotel: Hotel) => {
+          {hotels.map((hotel: Hotel, index: number) => {
             const stats = ratingMap[hotel.id]
             return (
               <HotelCard
@@ -33,6 +35,7 @@ export default async function HomePage() {
                 hotel={hotel}
                 avgRating={stats ? stats.sum / stats.count : undefined}
                 reviewCount={stats?.count}
+                index={index}
               />
             )
           })}
