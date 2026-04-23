@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Hotel, Review } from '@/lib/types'
 import ReviewForm from '@/components/ReviewForm'
 import ReviewList from '@/components/ReviewList'
+import ReviewInsights from '@/components/ReviewInsights'
 
 export default async function HotelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -44,6 +45,8 @@ export default async function HotelPage({ params }: { params: Promise<{ id: stri
           )}
         </div>
       </div>
+
+      <ReviewInsights hotelId={id} reviewCount={reviews?.length ?? 0} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
